@@ -10,7 +10,12 @@ service POService {
     @readonly entity ManufacturerOORRecordComments as projection on my.ManufacturerOORRecordComments;
     entity Uploads as projection on my.Uploads;
     entity MeeInfo as projection on my.MeeInfo;
-    entity UploadedPOs as projection on my.UploadedPOs;
+
+    annotate PurchaseOrderItems with actions {
+        changePrice
+    };
+    
+    // entity UploadedPOs as projection on my.UploadedPOs;
 
     @cds.persistence.skip
     @odata.singleton
@@ -20,3 +25,4 @@ service POService {
         fileName: String;
     };
 }
+

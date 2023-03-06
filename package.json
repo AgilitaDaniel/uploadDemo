@@ -7,19 +7,25 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^6",
+    "body-parser": "^1.20.1",
+    "body-parser-xml": "^2.0.3",
     "express": "^4",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@sap/ux-specification": "^1.102.14",
+    "@sap/ux-specification": "^1.102.15",
     "sqlite3": "^5.0.4"
   },
   "scripts": {
     "start": "cds run",
     "watch": "cds run",
-    "watch-manufactureroorrecords": "cds watch --open manufactureroorrecords/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-manufactureroorrecords": "cds watch --open manufactureroorrecords/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-purchaseordersupload": "cds watch --open purchaseordersupload/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-purchaseorderpriceupdate": "cds watch --open purchaseorderpriceupdate/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "sapux": [
-    "app/manufactureroorrecords"
+    "app/manufactureroorrecords",
+    "app/purchaseordersupload",
+    "app/purchaseorderpriceupdate"
   ]
 }

@@ -1,6 +1,6 @@
 namespace blaze.pomagic;
 
-using {managed} from '@sap/cds/common';
+using {managed, sap.common.CodeList, sap.common.Currencies} from '@sap/cds/common';
 
 entity Manufacturers {
   key CustomerNumber : String(20);
@@ -68,26 +68,62 @@ entity PurchaseOrders {
       InternalID   : String;
       bmcPONumber  : String(30);
       Manufacturer : Association to one Manufacturers;
-      Destination  : Association to one Destinations;
       Items        : Association to many PurchaseOrderItems
-                       on Items.purchaseOrderNumber = InternalID;
+                       on Items.purchaseOrderNumber = bmcPONumber;
+      to_Status    : Association to one POStatus;
+      Company: String;
+      Currency: String;
+      billToParty:String;
+      BuyingUnit: String;
+      Buyer: String;
+      IncoTerms: String; 
+      IncoTermsLocation: String;
+      PaymentTerms: String;
+
 }
 
 entity PurchaseOrderItems {
   key ID                  : UUID @Core.Computed;
       purchaseOrderNumber : String;
+      Destination  : Association to one Destinations;
       PurchaseOrder       : Association to one PurchaseOrders
-                               on PurchaseOrder.InternalID = purchaseOrderNumber;
+                               on PurchaseOrder.bmcPONumber = purchaseOrderNumber;
       positionNumber      : Integer;
       SKU                 : String;
       Bike                : Association to one Bikes
                               on Bike.SKU = SKU;
       quantity            : Integer;
+      quantityUnit: String(4);
       orderDate           : Date;
+      Currency: String;
+      price: Decimal;
+      firstReadyDate: Date;
+      ShippingMode: String;
+      deliveryDate: Date;
+      sendOrderConfirmation: String(2);
+      sendDeliveryConfirmation: String(2); //04 oder 02 erlaubt
+      invoiceExpected:  String(2);
+      pgiAndServiceConfirmationExpected: String(2);
+      Description: String;
+      to_Status    : Association to one POStatus;
 }
 
 entity UploadedPOItems: managed {
   key ID: UUID @Core.Computed;
   bmcPONumber: String;
   
+}
+
+entity POStatus : CodeList {
+  key code : String enum {
+    New     = 'N';
+    Uploaded = 'U';
+    UploadedWithWarning = 'W';
+    Error = 'E';
+  } default 'N';
+  criticality : Integer; //  2: yellow colour,  3: green colour, 0: unknown
+  fieldControl: Integer @odata.Type:'Edm.Byte'; // 1: #ReadOnly, 7: #Mandatory
+  createDeleteHidden: Boolean;
+  description: String;
+  insertDeleteRestriction: Boolean; // = NOT createDeleteHidden
 }
