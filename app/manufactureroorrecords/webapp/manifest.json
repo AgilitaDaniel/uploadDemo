@@ -130,6 +130,32 @@
                                             "enabled": true,
                                             "requiresSelection": false,
                                             "text": "Upload Records"
+                                        },
+                                        "errorLog": {
+                                            "press": "manufactureroorrecords.custom.ExcelUploadDialog.showErrorLog",
+                                            "visible": true,
+                                            "enabled": true,
+                                            "requiresSelection": false,
+                                            "text": "Show Error Log",
+                                            "position": {
+                                                "placement": "Before",
+                                                "anchor": "UploadExcel"
+                                            }
+                                        }
+                                    },
+                                    "tableSettings": {
+                                        "selectionMode": "Single"
+                                    }
+                                }
+                            },
+                            "content": {
+                                "header": {
+                                    "actions": {
+                                        "PostRecords": {
+                                            "press": "manufactureroorrecords.custom.ExcelUploadDialog.postRecords",
+                                            "visible": true,
+                                            "enabled": true,
+                                            "text": "Post Records"
                                         }
                                     }
                                 }
@@ -148,6 +174,11 @@
                         }
                     }
                 }
+            }
+        },
+        "extends": {
+            "extensions": {
+                "sap.ui.controllerExtensions": {}
             }
         }
     },

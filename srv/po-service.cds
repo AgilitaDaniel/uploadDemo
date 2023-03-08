@@ -7,6 +7,9 @@ service POService {
     @readonly entity Manufacturers as projection on my.Manufacturers;
     @readonly entity Destinations as projection on my.Destinations;
     entity ManufacturerOORRecords as projection on my.ManufacturerOORRecords;
+    entity UploadErrorLog as projection on my.UploadErrorLog;
+    entity FieldMapping as projection on my.FieldMapping;
+    entity Template as projection on my.Template;
     @readonly entity ManufacturerOORRecordComments as projection on my.ManufacturerOORRecordComments;
     entity Uploads as projection on my.Uploads;
     entity MeeInfo as projection on my.MeeInfo;

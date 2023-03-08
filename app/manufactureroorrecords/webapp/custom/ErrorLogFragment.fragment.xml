@@ -1,0 +1,48 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+    <Dialog
+		id="myPopover"
+		title="Error"
+		class="sapUiContentPadding"
+        resizable="true"
+        draggable="true"
+        beforeOpen=".onBeforeOpen"
+        afterClose=".onAfterClose">
+        <content>
+             <Table
+                id="ErrorTable"
+                noDataText="no Errors"
+                items="{/UploadErrorLog}">
+                <columns>
+                    <Column width="7rem">
+                        <Text text="Issue" />
+                    </Column>
+                    <Column width="auto">
+                        <Text text="Description" />
+                    </Column>
+                    <Column>
+                        <Text text="Date" />
+                    </Column>
+                    <Column>
+                        <Text text="User" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <ObjectStatus icon="sap-icon://error" text="{type}" state="{type}"/>
+                            <Text text="{fieldName} is Empty on line {line}"/>
+                            <Text text="{createdAt}"/>
+                            <Text text="{createdBy}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+        <endButton>
+            <Button id="Button" text="Close"  press=".onCloseDialog"></Button>
+        </endButton>
+	</Dialog>
+</c:FragmentDefinition>

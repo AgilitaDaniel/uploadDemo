@@ -1,6 +1,8 @@
 sap.ui.define([
-    "sap/m/MessageToast"
-], function (MessageToast) {
+    "sap/m/MessageToast",
+    "sap/m/MessageBox"
+], function (MessageToast,
+	MessageBox) {
     'use strict';
     function _createUploadController(oExtensionAPI, Entity) {
         var oUploadDialog;
@@ -39,6 +41,7 @@ sap.ui.define([
 
             onOk: function (oEvent) {
                 setDialogBusy(true)
+                const oSelectedKey = byId("idTemplateSelect").getSelectedKey()
 
                 var oFileUploader = byId("uploader");
                 var headPar = new sap.ui.unified.FileUploaderParameter();
@@ -120,6 +123,26 @@ sap.ui.define([
         };
     };
 
+    function _ErrorLogController(oExtensionAPI, Entity) {
+        var oErrorDialog
+        return{
+            onBeforeOpen: function (oEvent) {
+                oErrorDialog = oEvent.getSource();
+                oExtensionAPI.addDependent(oErrorDialog);
+            },
+
+            onAfterClose: function (oEvent) {
+                oExtensionAPI.removeDependent(oErrorDialog);
+                oErrorDialog.destroy();
+                oErrorDialog = undefined;
+            },
+
+            onCloseDialog: function(){
+                oErrorDialog.close()
+            }
+        }
+    };
+
     return {
         Upload: function (oBindingContext, aSelectedContexts) {
             this.loadFragment({
@@ -129,6 +152,26 @@ sap.ui.define([
             }).then(function (oDialog) {
                 oDialog.open();
             });
+        },
+
+        showErrorLog: function() {
+            this.loadFragment({
+                id: "errorLogList",
+                name: "manufactureroorrecords.custom.ErrorLogFragment",
+                controller: _ErrorLogController(this, "ManufacturerOORRecords")
+            }).then(function (oDialog) {
+                oDialog.open();
+            });
+        },
+        postRecords: async function() {
+            MessageBox.warning("You have Errors in your Log, these Entries will not get Posted. Do you want to Post?", {
+                actions: ["Post", "Cancel"],
+                onClose: sAction => {
+                    if(sAction === "Post"){
+                        MessageToast.show("Data Succesfully posted");
+                    } 
+                }
+            })
         }
     };
 });

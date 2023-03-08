@@ -7,6 +7,20 @@
         beforeOpen=".onBeforeOpen"
         afterClose=".onAfterClose">
         <content>
+            <VBox id="idSelectBox">
+                <Label id="idLabel" text="Select a Template:"/>
+                <Select 
+                    id="idTemplateSelect"
+                    forceSelection="true"
+                    selectedKey="1"
+                    width="100%"
+                    class="sapUiTinyMarginBottom">
+                    <items>
+                        <core:ListItem id="idListItenm1" key="1001" text="MING"/>
+                        <!-- <core:ListItem id="idListItenm2" key="2002" text="Test"/> -->
+                    </items>
+                </Select>
+            </VBox>
             <u:FileUploader id="uploader"
                 fileType="xlsx"
                 multiple="false"

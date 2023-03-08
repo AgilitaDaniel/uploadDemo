@@ -57,6 +57,26 @@ entity ManufacturerOORRecords : managed {
       validBmcNewRequestDate: Boolean;
 }
 
+entity UploadErrorLog : managed {
+  key ID : UUID @Core.Computed;
+  type: String;
+  fieldName : String;
+  line : Integer; 
+}
+
+entity Template : managed {
+  key ID : UUID @Core.Computed;
+  template_ID : String;
+  name: String;
+}
+
+entity FieldMapping : managed {
+  key ID : UUID @Core.Computed;
+  to_template: Association to one Template;
+  incomingFieldName: String;
+  databaseFieldName: String;
+}
+
 entity ManufacturerOORRecordComments : managed {
   key ID           : UUID @Core.Computed;
       vendorString : String;

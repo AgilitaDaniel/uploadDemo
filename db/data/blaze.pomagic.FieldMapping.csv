@@ -1,0 +1,9 @@
+ID,to_template_ID,incomingFieldName,databaseFieldName
+ea7afb77-1808-4d94-9eb2-fd8fd5055dc3,f715d152-d650-450f-8e76-cf2f4775e215,PO,shortCodePO
+c912ee20-03e2-46a8-b283-5f0aad5479c0,f715d152-d650-450f-8e76-cf2f4775e215,BMC PO,bmcPONumber
+888f68a7-3de6-474a-adcd-2a1ec47a940c,f715d152-d650-450f-8e76-cf2f4775e215,Model, description,
+814fe1a7-87ef-45a5-a140-e5feb3892d91,f715d152-d650-450f-8e76-cf2f4775e215,S/N,partSupplierPONumber
+b531bdf3-bb2c-490b-ac8f-4605e872fc20,f715d152-d650-450f-8e76-cf2f4775e215,SKU,SKU
+cd6d91ae-5beb-4aaa-8ce7-9e6125216481,f715d152-d650-450f-8e76-cf2f4775e215,Colorway,color
+9c6e0c8e-2650-4538-9f96-3c2afd311c5d,f715d152-d650-450f-8e76-cf2f4775e215,Order Q'TY,orderQuantity
+aceffc2d-c5cc-4d9a-a243-96476105cc42,f715d152-d650-450f-8e76-cf2f4775e215,Comment -1 (PARTS ETA),commentUnparsed
