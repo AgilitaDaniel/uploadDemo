@@ -125,6 +125,7 @@ sap.ui.define([
 
     function _ErrorLogController(oExtensionAPI, Entity) {
         var oErrorDialog
+
         return{
             onBeforeOpen: function (oEvent) {
                 oErrorDialog = oEvent.getSource();
@@ -163,15 +164,65 @@ sap.ui.define([
                 oDialog.open();
             });
         },
-        postRecords: async function() {
-            MessageBox.warning("You have Errors in your Log, these Entries will not get Posted. Do you want to Post?", {
-                actions: ["Post", "Cancel"],
-                onClose: sAction => {
-                    if(sAction === "Post"){
-                        MessageToast.show("Data Succesfully posted");
-                    } 
-                }
+
+        errorVisible: async function() {
+            let aErrorLog
+            let isVisible = false
+            await new Promise((resolve, reject) => {
+                $.get({url: "/po/UploadErrorLog", 
+                    success: (oData) => {
+                        aErrorLog = oData
+                        resolve(oData)
+                    },
+                    error: (oError) => {
+                        reject(oError)
+                    }
+                })
             })
+            if(aErrorLog.value.length >= 1){
+                isVisible = true
+            }
+            return isVisible;
+        },  
+        
+        postRecords: async function() {
+            let aErrorLog;
+            let aOORRecords;
+            const oModel = this.getModel()
+            await new Promise((resolve, reject) => {
+                $.get({url: "/po/UploadErrorLog", 
+                    success: (oData) => {
+                        aErrorLog = oData
+                        resolve(oData)
+                    },
+                    error: (oError) => {
+                        reject(oError)
+                    }
+                })
+            })
+            await new Promise((resolve, reject) => {
+                $.get({url: "/po/ManufacturerOORRecords", 
+                    success: (oData) => {
+                        aOORRecords = oData
+                        resolve(oData)
+                    },
+                    error: (oError) => {
+                        reject(oError)
+                    }
+                })
+            })
+            
+            if(aErrorLog){
+                MessageBox.warning("You have Errors in your Log, these Entries will not get Posted. Do you want to Post?", {
+                    actions: ["Post", "Cancel"],
+                    onClose: sAction => {
+                        if(sAction === "Post"){
+                            MessageToast.show("Data Succesfully posted");
+                        } 
+                    }
+                })
+            }
+            
         }
     };
 });

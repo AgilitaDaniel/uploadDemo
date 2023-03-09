@@ -30,6 +30,9 @@ annotate service.ManufacturerOORRecords with @(
     ]
 );
 annotate service.ManufacturerOORRecords with @(
+    Capabilities.DeleteRestrictions : {
+        Deletable : false,
+    },
     UI.FieldGroup #GeneratedGroup1 : {
         $Type : 'UI.FieldGroupType',
         Data : [
@@ -99,3 +102,10 @@ annotate service.ManufacturerOORRecords with @(
         },
     ]
 );
+
+// annotate service.ManufacturerOORRecords with actions {
+//     UploadExcel @(
+//         Core.OperationAvailable : false
+//     );
+// } ;
+

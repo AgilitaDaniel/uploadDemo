@@ -87,6 +87,9 @@
             "@i18n": {
                 "type": "sap.ui.model.resource.ResourceModel",
                 "uri": "i18n/i18n.properties"
+            },
+            "editControl": {
+                "type": "sap.ui.model.json.JSONModel"
             }
         },
         "resources": {
@@ -114,13 +117,6 @@
                         "settings": {
                             "entitySet": "ManufacturerOORRecords",
                             "variantManagement": "Page",
-                            "navigation": {
-                                "ManufacturerOORRecords": {
-                                    "detail": {
-                                        "route": "ManufacturerOORRecordsObjectPage"
-                                    }
-                                }
-                            },
                             "controlConfiguration": {
                                 "@com.sap.vocabularies.UI.v1.LineItem": {
                                     "actions": {
@@ -134,7 +130,7 @@
                                         "errorLog": {
                                             "press": "manufactureroorrecords.custom.ExcelUploadDialog.showErrorLog",
                                             "visible": true,
-                                            "enabled": true,
+                                            "enabled": "manufactureroorrecords.custom.ExcelUploadDialog.errorVisible",
                                             "requiresSelection": false,
                                             "text": "Show Error Log",
                                             "position": {
@@ -144,7 +140,7 @@
                                         }
                                     },
                                     "tableSettings": {
-                                        "selectionMode": "Single"
+                                        "selectionMode": "None"
                                     }
                                 }
                             },
